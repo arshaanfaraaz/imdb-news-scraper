@@ -1,3 +1,5 @@
+# IMDb News Scraper
+
 A web scraper that fetches the latest news articles from IMDb's top stories section. It stores the news in a Django web application, which allows users to view news with details like title, description, image, and click on an external link in the title.
 
 ## Features:
@@ -17,7 +19,7 @@ A web scraper that fetches the latest news articles from IMDb's top stories sect
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/IMDb-News-Scraper.git
+   git clone https://github.com/arshaanfaraaz/IMDb-News-Scraper.git
 
 2. Install dependencies and set up your PostgreSQL database and update the DATABASES setting in settings.py.
 
