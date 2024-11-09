@@ -3,19 +3,8 @@ from bs4 import BeautifulSoup
 from scraper.models import News
 import os
 import uuid
+from scraper.tasks import download_image
 
-def download_image(image_url, save_directory, image_name):
-    if not os.path.exists(save_directory):
-        os.makedirs(save_directory)
-    image_path = os.path.join(save_directory, image_name)
-    response = requests.get(image_url, stream=True)
-    
-    if response.status_code == 200:
-        with open(image_name, "wb") as file:
-            for chunk in response.iter_content(1024):
-                file.write(chunk)
-                
-    return image_path
 
 def scrape_imdb_news(): 
     url = "https://m.imdb.com/news/top/"
@@ -43,7 +32,7 @@ def scrape_imdb_news():
         image_path = None
         if image:
             image_name = f'image_{uuid.uuid4()}.jpg'
-            image_path = download_image(image, 'downloads', image_name)
+            image_path = download_image.delay(image, 'downloads/', image_name)
         
         news = {'title':title,
                 'description': description,

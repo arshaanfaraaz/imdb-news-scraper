@@ -1,25 +1,27 @@
-# IMDb News Scraper
+# IMDb News Scraper - Celery
 
-A web scraper that fetches the latest news articles from IMDb's top stories section. It stores the news in a Django web application, which allows users to view news with details like title, description, image, and click on an external link in the title.
+A a Django-based web application that scrapes the latest top news from IMDb and saves the articles to a PostgreSQL database. It uses Celery for asynchronous tasks, like downloading images, and Redis as the message broker and backend to manage task queues.
+
 
 ## Features:
-- Scrapes IMDb top news.
-- Saves the news articles in the Django database.
-- Displays the news articles in a user-friendly interface with Bootstrap styling.
-- Downloads news images and stores them locally.
+- Web Scraping: Fetches IMDb's top news headlines, descriptions, and images.
+- Celery Integration: Manages asynchronous tasks such as image downloading and database updates.
+- Redis Backend: Used as a message broker and task result backend for Celery.
+- Database: Stores articles and metadata in a PostgreSQL database.
+
 
 ## Requirements:
-- Python 3.x
-- Django 5.1.1
-- Requests
-- BeautifulSoup4
-- PostgreSQL
+- Backend: Django, Celery, Redis
+- Database: PostgreSQL
+- Web Scraping: BeautifulSoup, Requests
+- Task Queue: Celery, Redis
+
 
 ## Setup:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/arshaanfaraaz/IMDb-News-Scraper.git
+   git clone https://github.com/arshaanfaraaz/IMDb-News-Scraper-Celery.git
 
 2. Install dependencies and set up your PostgreSQL database and update the DATABASES setting in settings.py.
 
@@ -32,5 +34,10 @@ A web scraper that fetches the latest news articles from IMDb's top stories sect
 4. Run the Django server:
     ```bash
     python manage.py runserver
+
+5. Start Celery:
+    ```bash
+    celery -A scraper worker --loglevel=info
+
 
 
